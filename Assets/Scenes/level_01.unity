@@ -12285,7 +12285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4501404751446666, guid: 68a39471bcf807f45aace3b120f318f0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -90.51
+      value: -91.21
       objectReference: {fileID: 0}
     - target: {fileID: 4501404751446666, guid: 68a39471bcf807f45aace3b120f318f0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20500,6 +20500,10 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 1163876101}
+    - target: {fileID: 6062191744403066753, guid: c0c5c1f152b9fc44a8dc91451665f760, type: 3}
+      propertyPath: m_Mask
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6527350589980733054, guid: c0c5c1f152b9fc44a8dc91451665f760, type: 3}
       propertyPath: Target
       value: 
@@ -28869,6 +28873,16 @@ MonoBehaviour:
   barrelSpeed: 10
   barrelminrotation: -10
   barrelmaxrotation: 10
+  turnspeed: 30
+  turnminrotation: -30
+  turnmaxrotation: 30
+  RightFrontWheel: {fileID: 0}
+  LeftFrontWheel: {fileID: 0}
+  RightRearWheel: {fileID: 0}
+  LeftRearWheel: {fileID: 0}
+  TurnSpeedWheel: 30
+  TurnMinRotation: -30
+  TurnMaxRotation: 30
 --- !u!1001 &1780281714
 PrefabInstance:
   m_ObjectHideFlags: 0
