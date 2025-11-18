@@ -14,6 +14,15 @@ public class CannonController : MonoBehaviour
     public float turnminrotation = -30f;
     public float turnmaxrotation = 30f;
 
+    [SerializeField] private Transform BombSpawnLocation;
+    public GameObject BombPrefab;
+    public float ProjectileForce = 30f;
+    public float ProjectileTorque = 20f;
+
+    public float ReloadTime = 1f;
+    private float _ReloadExpectedtime = 0f;
+
+
     [SerializeField] private Transform RightFrontWheel;
     [SerializeField] private Transform LeftFrontWheel;
     [SerializeField] private Transform RightRearWheel;
@@ -42,6 +51,8 @@ public class CannonController : MonoBehaviour
     private void OnEnable()
     {
         _simpleControls.Enable();
+        _simpleControls.gameplay.fire.performed += ctx => { Fire(); };
+        _simpleControls.gameplay.MainMenu.performed += ctx => { MenuManager.Instance.ToggleMenu(); };
     }    
     private void OnDisable()
     {
@@ -53,6 +64,8 @@ public class CannonController : MonoBehaviour
         Vector2 move = _simpleControls.gameplay.move.ReadValue<Vector2>();
         turn(move.x);
         aim(move.y);
+
+        _ReloadExpectedtime += Time.deltaTime;
     }
 
     private void aim(float aim)
@@ -97,4 +110,20 @@ public class CannonController : MonoBehaviour
         RightRearWheel.localEulerAngles = -_turnWheel;
         
     }
+
+    private void Fire()
+    {
+        if (_ReloadExpectedtime >= ReloadTime)
+        {
+            _ReloadExpectedtime = 0f;
+            var cannonball = Instantiate(BombPrefab, BombSpawnLocation.position, BombSpawnLocation.rotation);
+
+            var rb = cannonball.GetComponent<Rigidbody>();
+
+            rb.AddTorque(Random.insideUnitSphere.normalized * ProjectileTorque, ForceMode.Impulse);
+            rb.AddForce(cannonball.transform.forward * ProjectileForce, ForceMode.Impulse);
+
+        }
+    }
+
 }
